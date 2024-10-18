@@ -1,0 +1,22 @@
+- name: Name for playbook 
+  hosts: all
+  gather_facts: true
+  become: yes
+  tasks:
+    - name: Test Omar
+      ansible.builtin.copy:
+        content: "Hi omar"
+        dest: "/tmp/hello-{{ ansible_date_time.date }}.txt"
+      when: "'servers' in group_names"
+
+    - name: Test Matthew
+      ansible.builtin.copy:
+        content: "Hi matthew"
+        dest: "/tmp/hello-{{ ansible_date_time.date }}.txt"
+      when: "'servers' in group_names"
+
+    - name: Test Anmol
+      ansible.builtin.copy:
+        content: "Hi anmol"
+        dest: "/tmp/hello-{{ ansible_date_time.date }}.txt"
+      when: "'servers' in group_names"

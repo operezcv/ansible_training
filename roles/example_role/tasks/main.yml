@@ -1,0 +1,6 @@
+---
+# tasks file for example-role
+- name: Main Task
+  ansible.builtin.copy:
+    content: "Im the main task"
+    dest: "/tmp/file.txt"

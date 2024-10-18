@@ -1,0 +1,6 @@
+- name: Apache playbook 
+  hosts: servers 
+  gather_facts: true
+  become: yes
+  roles:
+    - sample-apache 

@@ -1,0 +1,9 @@
+- hosts: all 
+  gather_facts: no
+  become: yes 
+  tasks:
+    - name: create file
+      ansible.builtin.copy:
+        content: "{{ word }}"
+        dest: "/var/lib/cloud/data/{{ word }}"
+

@@ -1,0 +1,45 @@
+---
+# tasks file for sample-apache
+- name: Install the latest version of Apache
+  yum:
+    name: 
+     - httpd
+     - php
+     - mod_ssl
+    state: latest
+
+- name: Install python3-firewall for firewalld module
+  yum:
+    name: 
+      - python3-firewall
+      - firewalld
+    state: present
+
+- name: Make sure apache is active on boot and started
+  ansible.builtin.service:
+    name: "httpd"
+    enabled: true
+    state: started
+
+- name: permit traffic in default zone for https service
+  ansible.posix.firewalld: 
+    service: "{{ item }}"
+    permanent: true
+    state: enabled
+  loop:
+    - http
+    - https
+
+- name: Set Listen directive in Apache configuration
+  lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^Listen'
+    line: "Listen {{ ansible_default_ipv4.address }}:80"
+    state: present
+  notify: Restart_apache
+
+- name: Index template
+  template: 
+   src: ./index.html.j2
+   dest: "/var/www/html/index.html"
+  notify: Restart_apache

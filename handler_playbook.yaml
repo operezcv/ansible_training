@@ -1,0 +1,32 @@
+- hosts: servers
+  gather_facts: yes
+  become: yes
+  pre_tasks:
+    - name: Pre Task
+      ansible.builtin.debug:
+        msg: "Hi im pretask"
+
+  tasks:
+    # *** This was an example that if the state doesnt change when you call the handler it will not be called ***
+    # - name: Main Task
+    #   ansible.builtin.copy:
+    #     content: "Im the main task"
+    #     dest: "/tmp/file.txt"
+    - name: Main Task
+      ansible.builtin.copy:
+        content: "Im the main task"
+        dest: "/tmp/file.txt"
+      notify: 
+        - Main task handler
+
+  post_tasks:
+    - name: Post Task
+      ansible.builtin.debug:
+        msg: "Hi im posttask"
+  
+  handlers:
+    - name: Main task handler
+      ansible.builtin.file:
+        path: /tmp/file.txt
+        state: absent
+ 

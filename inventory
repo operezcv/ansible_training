@@ -1,0 +1,12 @@
+[servers]
+ec2-34-228-223-55.compute-1.amazonaws.com
+ec2-52-54-182-133.compute-1.amazonaws.com
+
+[matthew]
+ec2-54-166-209-252.compute-1.amazonaws.com
+ec2-54-224-127-88.compute-1.amazonaws.com
+
+[anmol]
+ec2-3-90-31-42.compute-1.amazonaws.com
+ec2-54-159-249-204.compute-1.amazonaws.com
+

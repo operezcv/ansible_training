@@ -1,0 +1,13 @@
+- hosts: all
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: loop cores
+      template: 
+        src: ./cores.j2
+        dest: "/tmp/cores-{{ ansible_hostname }}.txt"
+      
+    - name: fetch file
+      fetch:
+        src: "/tmp/cores-{{ ansible_hostname }}.txt"
+        dest: /Users/operez/ansible-training/
